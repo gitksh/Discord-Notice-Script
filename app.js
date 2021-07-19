@@ -17,10 +17,12 @@ client.login(config.BOT_TOKEN).then(async () => {
             let user = await client.users.fetch(config.BOT_OWNER, false, true);
             await user.send(noticeTxt.toString());
             console.log('DONE');
+            process.exit();
         } else {
             }
         }
     } catch (e) {
         console.error(e);
+        process.exit();
     }
 });
