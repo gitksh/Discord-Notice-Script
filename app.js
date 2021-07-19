@@ -19,7 +19,14 @@ client.login(config.BOT_TOKEN).then(async () => {
             console.log('DONE');
             process.exit();
         } else {
+            const guilds = await client.guilds.cache.map(guild => guild.id);
+            for (const guild of guilds) {
+                let ownerId = (await client.guilds.fetch(guild, false, true)).ownerID;
+                await (await client.users.fetch(ownerId, false, true)).send(noticeTxt.toString());
             }
+            }
+            console.log('DONE');
+            process.exit();
         }
     } catch (e) {
         console.error(e);
