@@ -8,3 +8,4 @@ const config = {
     'NOTICE_TXT': ''
 };
 
+client.login(config.BOT_TOKEN);
