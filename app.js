@@ -20,11 +20,19 @@ client.login(config.BOT_TOKEN).then(async () => {
             process.exit();
         } else {
             const guilds = await client.guilds.cache.map(guild => guild.id);
+            let owners = [];
+
             for (const guild of guilds) {
                 let ownerId = (await client.guilds.fetch(guild, false, true)).ownerID;
-                await (await client.users.fetch(ownerId, false, true)).send(noticeTxt.toString());
+                if (!owners.includes(ownerId)) {
+                    await owners.push(ownerId);
+                }
             }
+
+            for (const owner of owners) {
+                await (await client.users.fetch(owner, false, true)).send(noticeTxt.toString());
             }
+
             console.log('DONE');
             process.exit();
         }
