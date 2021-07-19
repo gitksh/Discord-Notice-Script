@@ -1,0 +1,22 @@
+{
+  "name": "discord-notice-script",
+  "version": "1.0.0",
+  "description": "A script sends notices via DM to the Discord guild owner with discord.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidetoy/Discord-Notice-Bot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sidetoy/Discord-Notice-Bot/issues"
+  },
+  "homepage": "https://github.com/sidetoy/Discord-Notice-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
