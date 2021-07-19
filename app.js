@@ -8,7 +8,6 @@ const config = {
     'NOTICE_TXT': ''
 };
 
-client.login(config.BOT_TOKEN);
 client.login(config.BOT_TOKEN).then(async () => {
     try {
         const noticeTxt = await fs.readFileSync(config.NOTICE_TXT);
