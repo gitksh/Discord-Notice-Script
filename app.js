@@ -10,10 +10,9 @@ const config = {
 
 client.login(config.BOT_TOKEN).then(async () => {
     try {
-        const noticeTxt = await fs.readFileSync(config.NOTICE_TXT);
-
+        let noticeTxt = await fs.readFileSync(config.NOTICE_TXT);
         if (process.argv[2] !== 'release') {
-            let user = await client.users.fetch(config.BOT_OWNER, false, true);
+            let user = await client.users.fetch(config.BOT_OWNER, true, true);
             await user.send(noticeTxt.toString());
             console.log('DONE');
             process.exit();
@@ -22,14 +21,17 @@ client.login(config.BOT_TOKEN).then(async () => {
             let owners = [];
 
             for (const guild of guilds) {
-                let ownerId = (await client.guilds.fetch(guild, false, true)).ownerID;
+                let getGuild = await client.guilds.fetch(guild, true, true)
+                let ownerId = getGuild.ownerID;
                 if (!owners.includes(ownerId)) {
-                    await owners.push(ownerId);
+                    try {
+                        await owners.push(ownerId);
+                        await (await client.users.fetch(ownerId, true, true)).send(noticeTxt.toString());
+                    } catch (e) {
+                        console.error(e);
+                        process.exit();
+                    }
                 }
-            }
-
-            for (const owner of owners) {
-                await (await client.users.fetch(owner, false, true)).send(noticeTxt.toString());
             }
 
             console.log('DONE');
